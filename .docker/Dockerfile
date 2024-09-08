@@ -1,4 +1,4 @@
-FROM php:8.2.6-fpm
+FROM php:8.3.9-fpm
 
 # Домашний каталог контейнера
 WORKDIR /var/www
