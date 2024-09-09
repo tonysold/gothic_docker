@@ -36,6 +36,7 @@ services:
       MYSQL_DATABASE: 'gothic'
       MYSQL_USER: 'dobr'
       MYSQL_PASSWORD: 'risenovsky'
+      MYSQL_HOST: 'localhost'
     volumes:
       - ./data:/docker-entrypoint-initdb.d
       - ./data/gothic:/docker-entrypoint-initdb.d
@@ -49,7 +50,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: 'mysql://dobr:tonysold@db:3306/gothic'
+      DATABASE_URL: 'mysql://dobr:localhost@db:localhost:3306/gothic'
     networks:
       - net-php-service
 
