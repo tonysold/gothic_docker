@@ -1,18 +1,13 @@
-version: '3.5'
 name: gothic
 
-# Services
 services:
-
   # PHP FPM Service
   php:
     container_name: php
     build:
-      dockerfile: php-dockerfile
       context: .
-    working_dir: /var/www/html
     volumes:
-      - '/var/www/html'
+      - '../:/var/www/html'
       - './php-logging.conf:/usr/local/etc/php-fpm.d/zz-log.conf'
     depends_on:
       - mariadb
@@ -22,7 +17,7 @@ services:
     container_name: web
     image: nginx:latest
     ports:
-      - 8080:80
+      - 8081:80
     links:
       - 'php'
     volumes:

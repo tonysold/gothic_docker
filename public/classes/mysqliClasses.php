@@ -1,5 +1,5 @@
 <?php
-define('DB_SERVER', 'localhost');
+define('DB_SERVER', 'db');
 define('DB_USER', 'dobr');
 define('DB_PASS', 'risenovsky');
 define('DB_NAME', 'gothic');
