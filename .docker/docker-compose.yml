@@ -1,0 +1,51 @@
+version: '3.5'
+name: gothic
+
+# Services
+services:
+
+  # PHP FPM Service
+  php:
+    container_name: php
+    build:
+      dockerfile: php-dockerfile
+      context: .
+    working_dir: /var/www/html
+    volumes:
+      - '/var/www/html'
+      - './php-logging.conf:/usr/local/etc/php-fpm.d/zz-log.conf'
+    depends_on:
+      - mariadb
+
+  # Nginx Service
+  nginx:
+    container_name: web
+    image: nginx:latest
+    ports:
+      - 8080:80
+    links:
+      - 'php'
+    volumes:
+      - '../:/var/www/html'
+      - './nginx-conf:/etc/nginx/conf.d'
+    depends_on:
+      - php
+
+
+  # MariaDB Service
+  mariadb:
+    container_name: db
+    image: mariadb:10.9
+    environment:
+      MYSQL_ROOT_PASSWORD: 'risenovsky'
+      MYSQL_DATABASE: 'gothic'
+      MYSQL_USER: 'dobr'
+      MYSQL_PASSWORD: 'risenovsky'
+      MYSQL_HOST: 'localhost'
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+      - ./data/gothic:/docker-entrypoint-initdb.d
+
+# Volumes
+volumes:
+  mysqldata:
