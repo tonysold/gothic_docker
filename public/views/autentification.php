@@ -1,3 +1,7 @@
+<?php
+//добавляем буферизацию, чтобы header не ругался
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,6 +37,7 @@
     </form>
     </div>
     <?php
+
     if (isset($_POST['auth']) && $_POST['auth'] == true) {
         if (empty($_POST['username']) && empty($_POST['password'])) {
             echo 'Введите все данные';
@@ -45,6 +50,7 @@
         $_SESSION['login_success'] = true;
         header('Location: tables');
     }
+    ob_end_flush();
     ?>
     <a href="/">На Главную</a>
 </body>

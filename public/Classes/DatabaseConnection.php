@@ -1,6 +1,6 @@
 <?php
 
-define('DB_SERVER', 'db');
+define('DB_SERVER', 'mariadb');
 define('DB_USER', 'dobr');
 define('DB_PASS', 'risenovsky');
 define('DB_NAME', 'gothic');
@@ -98,7 +98,6 @@ class DatabaseConnection
 
         if (count($result) > 0) {
             $userData = $result[0];
-            echo "Пользователь с именем $userName найден";
             $session = new Session;
             $session->setUserData($userData);
             return true;

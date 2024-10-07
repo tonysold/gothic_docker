@@ -3,7 +3,7 @@ FROM php:8.3.9-fpm
 # Домашний каталог контейнера
 WORKDIR /var/www
 
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+#RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 #RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Обновление системы
@@ -13,16 +13,19 @@ RUN apt-get update && apt-get upgrade -y \
 # Устанавливаем необходимые пакеты
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libwebp-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libzip-dev libgmp-dev libffi-dev libssl-dev \
+    libwebp-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libzip-dev libpq-dev libgmp-dev libffi-dev libssl-dev \
     libfreetype6 libfreetype6-dev \
     locales \
     jpegoptim optipng pngquant gifsicle \
-    nano \
+    vim nano \
     zip unzip \
+    git \
     curl
 
-RUN docker-php-ext-install opcache && RUN docker-php-ext-install pdo pdo_mysql
-RUN docker-php-ext-enable pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install gd \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
 
 # Установка composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

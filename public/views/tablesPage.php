@@ -4,9 +4,6 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
     echo "Вы успешно вошли!";
     unset($_SESSION['login_success']);
 }
-
-$drivers = PDO::getAvailableDrivers();
-print_r($drivers);
 ?>
 
 <!DOCTYPE html>
