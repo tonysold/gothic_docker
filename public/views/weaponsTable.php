@@ -10,9 +10,9 @@
     </thead>
     <tbody>
         <?php
-        $showGothic = new DB_con;
-        $sql = $showGothic->showAll();
-        while ($row = mysqli_fetch_array($sql)) {
+        $showGothic = new DatabaseConnection;
+        $statement = $showGothic->showAll();
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <tr>
                 <td><img name="weapon_image" src="<?php echo $row['weapon_image']; ?>"></td>

@@ -4,6 +4,9 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
     echo "Вы успешно вошли!";
     unset($_SESSION['login_success']);
 }
+
+$drivers = PDO::getAvailableDrivers();
+print_r($drivers);
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +33,6 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
             <input type="submit" name="submit" value="Выбрать">
         </form>
         <?php
-        //подключаем классы мускли
-        require_once __DIR__ . '/../classes/mysqliClasses.php';
-
         //проверяем на сабмит, если сабмит был, выводим таблицы
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             //проверяем что было передано в посте и в зависимости от кейса метод обращается к нужной таблице
@@ -48,6 +48,7 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
                     require_once 'weaponsTable.php';
                     break;
             }
+        }
         ?>
             </tbody>
             </table>
@@ -57,8 +58,7 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
 </body>
 
 </html>
-<pre>
 <?php
-print_r ($_SESSION);
-print_r ($_POST);
-        }
+
+
+?>

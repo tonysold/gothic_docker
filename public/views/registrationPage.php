@@ -29,22 +29,23 @@
             <br>
     </div>
     <div class="btn-container">
+        <input type="hidden" name="register" value="true">
         <button type="submit" class="btn">Зарегистрироваться</button>
     </div>
     </form>
     </div>
     <?php
-    require_once __DIR__ . '/../classes/mysqliClasses.php';
-
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $registration = new DB_con;
-        $registration->addUser();
-    } else {
-        echo 'Введите данные';
+    if (isset($_POST['register']) && ($_POST['register'] == true)) {
+        if (empty($_POST['username']) && empty($_POST['password'])) {
+            echo 'Введите данные';
+        } else {
+            $registration = new DatabaseConnection;
+            $registration->addUser();
+        }
     }
-    print_r($_POST);
     ?>
-
+    <br>
+    <a href="/">На Главную</a>
 </body>
 
 </html>

@@ -13,16 +13,16 @@ RUN apt-get update && apt-get upgrade -y \
 # Устанавливаем необходимые пакеты
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libwebp-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libzip-dev libpq-dev libgmp-dev libffi-dev libssl-dev \
+    libwebp-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libzip-dev libgmp-dev libffi-dev libssl-dev \
     libfreetype6 libfreetype6-dev \
     locales \
     jpegoptim optipng pngquant gifsicle \
     nano \
     zip unzip \
-    curl 
+    curl
 
-RUN docker-php-ext-install opcache && docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-
+RUN docker-php-ext-install opcache && RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-enable pdo_mysql
 
 # Установка composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

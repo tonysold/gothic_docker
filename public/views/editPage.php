@@ -25,12 +25,10 @@
             </thead>
             <tbody>
                 <?php
-                require_once __DIR__ . '/../classes/mysqliClasses.php';
-
                 if (isset($_GET['character_id'])) {
-                    $showOneGothic = new DB_con;
-                    $sql = $showOneGothic->showOne();
-                    while ($row = mysqli_fetch_array($sql)) {
+                    $showOneGothic = new DatabaseConnection;
+                    $statement = $showOneGothic->showOne();
+                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                         <tr>
                             <td><img name="character_image" src="<?php echo $row['character_image']; ?>"></td>

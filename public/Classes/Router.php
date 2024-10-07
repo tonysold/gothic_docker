@@ -1,7 +1,4 @@
 <?php
-
-require_once __DIR__ . '/../classes/sessionClasses.php';
-
 class Router
 {
     private $routes = [];
@@ -16,6 +13,7 @@ class Router
     {
         $this->addRoute('GET', $url, $callback);
     }
+
 
     public function post($url, $callback)
     {

@@ -27,27 +27,26 @@
             <br>
     </div>
     <div class="btn-container">
+        <input type="hidden" name="auth" value="true">
         <button type="submit" class="btn">Войти</button>
     </div>
     </form>
     </div>
     <?php
-    require_once __DIR__ . '/../classes/mysqliClasses.php';
-    require_once __DIR__ . '/../classes/sessionClasses.php';
-
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $autentification = new DB_con;
-        $autentification->loginUser();
-    } else {
-        echo 'Введите все данные';
+    if (isset($_POST['auth']) && $_POST['auth'] == true) {
+        if (empty($_POST['username']) && empty($_POST['password'])) {
+            echo 'Введите все данные';
+        } else {
+            $autentification = new DatabaseConnection;
+            $autentification->loginUser();
+        }
     }
-    if ($autentification == true) 
-    {
+    if (isset($autentification) && $autentification == true) {
         $_SESSION['login_success'] = true;
         header('Location: tables');
     }
     ?>
-
+    <a href="/">На Главную</a>
 </body>
 
 </html>

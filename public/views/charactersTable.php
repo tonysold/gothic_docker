@@ -10,12 +10,12 @@
     </thead>
     <tbody>
         <?php
-        $showGothic = new DB_con;
+        $showGothic = new DatabaseConnection;
         //метод Show all показывает все данные из таблицы charcters 
         //в дальнейшем метод будет показывать   и другие таблицы в зависимости от кейса
-        $sql = $showGothic->showAll("ORDER BY characters_name ASC");
+        $statement = $showGothic->showAll();
         $cnt = 1;
-        while ($row = mysqli_fetch_array($sql)) {
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <tr>
                 <td><?php echo $cnt; ?></td>
@@ -28,4 +28,4 @@
         <?php
             $cnt++;
         }
-                        //таблица с лагерями 
+

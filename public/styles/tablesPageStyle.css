@@ -1,86 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-  img {
-    display: block;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-  }
-  
-  .container {
-    width: 1000px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  
-  .container h1 {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .container form {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-  }
-  
-  label {
-    margin-right: 10px;
-  }
-  
-  select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-  }
-  
-  input[type="submit"] {
-    padding: 5px 10px;
-    background-color: #d4b92e;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-  }
-  
-  table {
-    width: 100%;
-    margin-top: 50px;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  a {
-    color: #d4b92e;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    color: #a59024;
-    text-decoration: underline;
-  }
+img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+.container {
+  width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+
+.container h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.container form {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
+input[type="submit"] {
+  padding: 5px 10px;
+  background-color: #d4b92e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  margin-top: 50px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+a {
+  color: #d4b92e;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+a:hover {
+  color: #a59024;
+  text-decoration: underline;
+}
