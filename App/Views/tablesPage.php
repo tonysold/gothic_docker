@@ -13,7 +13,7 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gothic Tables</title>
-    <link rel="stylesheet" href="styles/tablesPageStyle.css">
+    <link rel="stylesheet" href="/css/tablesPageStyle.css" type="text/css"> 
 </head>
 
 <body>
@@ -56,6 +56,6 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
 
 </html>
 <?php
-
+print_r($_SESSION);
 
 ?>

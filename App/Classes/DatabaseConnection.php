@@ -1,4 +1,6 @@
 <?php
+namespace App\Classes;
+use PDO;
 
 define('DB_SERVER', 'mariadb');
 define('DB_USER', 'dobr');
@@ -47,12 +49,11 @@ class DatabaseConnection
     public function showOne()
     {
         $characterid = $_GET['character_id'];
-        $showOneQuery = $this->dbh->prepare("SELECT characters.*, belongs.name AS belong_name, jobs.name AS job_name, weapons.name AS weapon_name 
-    FROM characters 
-    LEFT JOIN belongs ON characters.belong_id = belongs.id 
-    LEFT JOIN jobs ON characters.job_id = jobs.id 
-    LEFT JOIN weapons ON characters.character_weapon_id = weapons.weapon_id 
-    WHERE characters.character_id = :character_id");
+        $showOneQuery = $this->dbh->prepare("SELECT * FROM characters 
+            LEFT JOIN belongs ON characters.belong_id = belongs.id 
+            LEFT JOIN jobs ON characters.job_id = jobs.id 
+            LEFT JOIN weapons ON characters.character_weapon_id = weapons.weapon_id 
+            WHERE characters.character_id = :character_id");
         $showOneQuery->bindParam(':character_id', $characterid);
         $showOneQuery->execute();
         return $showOneQuery;
@@ -98,7 +99,7 @@ class DatabaseConnection
 
         if (count($result) > 0) {
             $userData = $result[0];
-            $session = new Session;
+            $session = new App\Classes\Session;
             $session->setUserData($userData);
             return true;
         } else {

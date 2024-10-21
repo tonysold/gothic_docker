@@ -6,7 +6,7 @@
     </thead>
     <tbody>
         <?php
-        $showGothic = new DatabaseConnection;
+        $showGothic = new App\Classes\DatabaseConnection;
         //через шоу ол показываем другую табллицу кэмпс, 
         //не знаю как избавиться от двойного свич кейса здесь и в классах
         //может так оно и должно работать

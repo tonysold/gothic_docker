@@ -1,11 +1,15 @@
+<?php
+//добавляем буферизацию, чтобы header не ругался
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gothic Registration</title>
-    <link rel="stylesheet" href="styles/registrationStyle.css">
+    <title>Gothic Autentification</title>
+    <link rel="stylesheet" href="/css/registrationStyle.css">
 </head>
 
 <body>
@@ -13,7 +17,7 @@
         <div class="header">
             <h1>Кто ты, воин?</h1>
         </div>
-        <form method="post" action="/registration">
+        <form method="post" action="/autentification">
             <div class="form-group">
                 <label for="username">Введитe имя</label>
                 <input type="text" name="username">
@@ -24,27 +28,30 @@
                 <input type="password" name="password">
                 <br>
             </div>
-            <label for="admin">Хочу стать редактором</label>
-            <input type="checkbox" name="admin">
             <br>
     </div>
     <div class="btn-container">
-        <input type="hidden" name="register" value="true">
-        <button type="submit" class="btn">Зарегистрироваться</button>
+        <input type="hidden" name="auth" value="true">
+        <button type="submit" class="btn">Войти</button>
     </div>
     </form>
     </div>
     <?php
-    if (isset($_POST['register']) && ($_POST['register'] == true)) {
+
+    if (isset($_POST['auth']) && $_POST['auth'] == true) {
         if (empty($_POST['username']) && empty($_POST['password'])) {
-            echo 'Введите данные';
+            echo 'Введите все данные';
         } else {
-            $registration = new DatabaseConnection;
-            $registration->addUser();
+            $autentification = new \App\Classes\DatabaseConnection;
+            $autentification->loginUser();
         }
     }
+    if (isset($autentification) && $autentification == true) {
+        $_SESSION['login_success'] = true;
+        header('Location: tables');
+    }
+    ob_end_flush();
     ?>
-    <br>
     <a href="/">На Главную</a>
 </body>
 

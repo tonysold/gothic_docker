@@ -39,7 +39,7 @@ services:
       MYSQL_HOST: 'localhost'
     volumes:
       - ./data:/docker-entrypoint-initdb.d
-      - ./data/gothic:/docker-entrypoint-initdb.d
+      - ./data/:/docker-entrypoint-initdb.d
 
 # Volumes
 volumes:
