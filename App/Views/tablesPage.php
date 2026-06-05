@@ -1,7 +1,6 @@
 <?php
-$selectedTable = $_POST['table'] ?? 0; //добавил ноль чтобы не вылезал ворнинг
+$selectedTable = $_POST['table'] ?? 0;
 if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
-    echo "Вы успешно вошли!";
     unset($_SESSION['login_success']);
 }
 ?>
@@ -18,44 +17,41 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
 
 <body>
     <div class="container">
-        <h1>Выбери таблицу</h1>
+        <h1>Архивы Gothic</h1>
+        
         <form method="post" action="/tables">
-            <label for="tableSelect"></label>
+            <label for="tableSelect">Выберите раздел:</label>
             <select id="tableSelect" name="table">
                 <option value="characters" <?php if ($selectedTable == 'characters') echo 'selected'; ?>>Персонажи</option>
                 <option value="camps" <?php if ($selectedTable == 'camps') echo 'selected'; ?>>Лагеря</option>
                 <option value="weapons" <?php if ($selectedTable == 'weapons') echo 'selected'; ?>>Оружие</option>
                 <option value="enemys" <?php if ($selectedTable == 'enemys') echo 'selected'; ?>>Враги</option>
             </select>
-            <input type="submit" name="submit" value="Выбрать">
+            <input type="submit" name="submit" value="Показать">
         </form>
-        <?php
-        //проверяем на сабмит, если сабмит был, выводим таблицы
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-            //проверяем что было передано в посте и в зависимости от кейса метод обращается к нужной таблице
 
-            switch ($selectedTable) {
-                case 'characters':
-                    require_once 'charactersTable.php';
-                    break;
-                case 'camps':
-                    require_once 'campsTable.php';
-                    break;
-                case 'weapons':
-                    require_once 'weaponsTable.php';
-                    break;
+        <div class="table-wrapper">
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+                switch ($selectedTable) {
+                    case 'characters':
+                        require_once 'charactersTable.php';
+                        break;
+                    case 'camps':
+                        require_once 'campsTable.php';
+                        break;
+                    case 'weapons':
+                        require_once 'weaponsTable.php';
+                        break;
+                }
             }
-        }
-        ?>
-            </tbody>
-            </table>
-            <br>
-            <a href="/">На Главную</a>
+            ?>
+        </div>
+
+        <div class="footer-nav">
+            <a href="/" class="back-link">← Вернуться в начало</a>
+        </div>
     </div>
 </body>
 
 </html>
-<?php
-print_r($_SESSION);
-
-?>

@@ -33,9 +33,3 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Чистим файлы
 RUN docker-php-source delete
 RUN apt-get autoremove --purge -y && apt-get autoclean -y && apt-get clean -y
-
-# Настройка пользователя для работы контейнера и взаимодействия прав
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
-
-USER www

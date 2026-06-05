@@ -99,7 +99,7 @@ class DatabaseConnection
 
         if (count($result) > 0) {
             $userData = $result[0];
-            $session = new App\Classes\Session;
+            $session = new Session;
             $session->setUserData($userData);
             return true;
         } else {

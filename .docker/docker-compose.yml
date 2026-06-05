@@ -8,7 +8,6 @@ services:
       context: .
     volumes:
       - '../:/var/www/html'
-      - './php-logging.conf:/usr/local/etc/php-fpm.d/zz-log.conf'
     depends_on:
       - mariadb
 
@@ -39,7 +38,6 @@ services:
       MYSQL_HOST: 'localhost'
     volumes:
       - ./data:/docker-entrypoint-initdb.d
-      - ./data/:/docker-entrypoint-initdb.d
 
 # Volumes
 volumes:
