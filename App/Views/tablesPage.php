@@ -1,5 +1,10 @@
 <?php
-$selectedTable = $_POST['table'] ?? 0;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['table'])) {
+    $_SESSION['selected_table'] = $_POST['table'];
+}
+
+$selectedTable = $_POST['table'] ?? $_SESSION['selected_table'] ?? 0;
+
 if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
     unset($_SESSION['login_success']);
 }
@@ -32,7 +37,7 @@ if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
 
         <div class="table-wrapper">
             <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+            if ($selectedTable && $selectedTable !== 0) {
                 switch ($selectedTable) {
                     case 'characters':
                         require_once 'charactersTable.php';

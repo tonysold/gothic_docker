@@ -22,9 +22,10 @@ class DatabaseConnection
         }
     }
 
-    public function showAll()
+    public function showAll($tableName = null)
     {
-        switch ($_POST['table']) {
+        $table = $tableName ?? $_POST['table'] ?? null;
+        switch ($table) {
             case 'characters':
                 $showQuery =  $this->dbh->prepare("SELECT * FROM characters 
                 LEFT JOIN belongs ON characters.belong_id = belongs.id 

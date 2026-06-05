@@ -7,17 +7,16 @@
     <tbody>
         <?php
         $showGothic = new App\Classes\DatabaseConnection;
-        //через шоу ол показываем другую табллицу кэмпс, 
-        //не знаю как избавиться от двойного свич кейса здесь и в классах
-        //может так оно и должно работать
-        $statement = $showGothic->showAll();
-        $cnt = 1;
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $statement = $showGothic->showAll('camps');
+        if ($statement) {
+            $cnt = 1;
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <tr>
                 <td><?php echo $cnt; ?></td>
                 <td><?php echo htmlspecialchars($row['belong_name']); ?></td>
             </tr>
         <?php
-            $cnt++;
+                $cnt++;
+            }
         }

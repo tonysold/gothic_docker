@@ -11,8 +11,9 @@
     <tbody>
         <?php
         $showGothic = new \App\Classes\DatabaseConnection;
-        $statement = $showGothic->showAll();
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $statement = $showGothic->showAll('weapons');
+        if ($statement) {
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <tr>
                 <td><img name="weapon_image" src="<?php echo $row['weapon_image']; ?>"></td>
@@ -23,4 +24,5 @@
                 <td><?php echo htmlspecialchars($row['weapon_type']); ?></td>
             </tr>
         <?php
+            }
         }

@@ -11,11 +11,10 @@
     <tbody>
         <?php
         $showGothic = new App\Classes\DatabaseConnection;
-        //метод Show all показывает все данные из таблицы charcters 
-        //в дальнейшем метод будет показывать   и другие таблицы в зависимости от кейса
-        $statement = $showGothic->showAll();
-        $cnt = 1;
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $statement = $showGothic->showAll('characters');
+        if ($statement) {
+            $cnt = 1;
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <tr>
                 <td><?php echo $cnt; ?></td>
@@ -26,6 +25,7 @@
                 <td><a href="/edit?character_id=<?= $row['character_id']; ?>">Подробнее</a></td>
             </tr>
         <?php
-            $cnt++;
+                $cnt++;
+            }
         }
 
