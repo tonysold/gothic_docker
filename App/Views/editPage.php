@@ -10,44 +10,63 @@
 
 <body>
     <div class="container">
-        <h2>Персонаж</h2>
-        <p>Страничка показывает более подробное описание элементов таблицы</p>
-        <table>
-            <thead>
-                <th>Изображение</th>
-                <th>Имя</th>
-                <th>Табличный<br>номер</th>
-                <th>Уровень</th>
-                <th>Лагерь</th>
-                <th>Гильдия</th>
-                <th>Описание</th>
-                <th>Оружие</th>
-            </thead>
-            <tbody>
-                <?php
-                if (isset($_GET['character_id'])) {
-                    $showOneGothic = new \App\Classes\DatabaseConnection;
-                    $statement = $showOneGothic->showOne();
-                    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                        <tr>
-                            <td><img name="character_image" src="<?php echo $row['character_image']; ?>"></td>
-                            <td><?php echo htmlspecialchars($row['characters_name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['character_id']); ?></td>
-                            <td><?php echo htmlspecialchars($row['level']); ?></td>
-                            <td><?php echo htmlspecialchars($row['belong_name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['characters_description']); ?></td>
-                            <td><?php echo htmlspecialchars($row['weapon_name']); ?></td>
-                        </tr>
-            </tbody>
-        </table>
-        <!-- TODO: Добавить возвращение с пост параметром выбранной таблицы (вероятнее всего через сессию) -->
-        <br>
-        <a href="/tables">Вернуться к таблицам</a>
+        <h1>Сведения о персонаже</h1>
+        
+        <?php
+        if (isset($_GET['character_id'])) {
+            $showOneGothic = new \App\Classes\DatabaseConnection;
+            $statement = $showOneGothic->showOne();
+            if ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <div class="profile-card">
+                <div class="profile-image-container">
+                    <img src="<?php echo $row['character_image']; ?>" alt="<?php echo htmlspecialchars($row['characters_name']); ?>">
+                </div>
+                
+                <div class="profile-info">
+                    <div class="profile-header">
+                        <h2><?php echo htmlspecialchars($row['characters_name']); ?></h2>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">ID</span>
+                            <span class="stat-value">#<?php echo htmlspecialchars($row['character_id']); ?></span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Уровень</span>
+                            <span class="stat-value"><?php echo htmlspecialchars($row['level']); ?></span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Лагерь</span>
+                            <span class="stat-value"><?php echo htmlspecialchars($row['belong_name']); ?></span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Гильдия</span>
+                            <span class="stat-value"><?php echo htmlspecialchars($row['name']); ?></span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Оружие</span>
+                            <span class="stat-value"><?php echo htmlspecialchars($row['weapon_name'] ?: 'Нет данных'); ?></span>
+                        </div>
+                    </div>
+
+                    <div class="profile-description">
+                        <strong>Описание:</strong><br>
+                        <?php echo nl2br(htmlspecialchars($row['characters_description'])); ?>
+                    </div>
+                </div>
+            </div>
+        <?php
+            } else {
+                echo "<p style='text-align:center;'>Персонаж не найден.</p>";
+            }
+        }
+        ?>
+
+        <div class="footer-nav">
+            <a href="/tables" class="back-link">← Вернуться к таблицам</a>
+        </div>
     </div>
 </body>
-<?php
-                    }
-                }
-?>
+</html>
