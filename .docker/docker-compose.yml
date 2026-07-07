@@ -1,4 +1,4 @@
-name: gothic
+version: '3.8'
 
 services:
   # PHP FPM Service
@@ -16,7 +16,7 @@ services:
     container_name: nginx_gothic
     image: nginx:latest
     ports:
-      - 8081:80
+      - 80:80
     links:
       - 'php'
     volumes:

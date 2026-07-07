@@ -27,8 +27,8 @@ RUN docker-php-ext-install gd \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
-# Установка composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Установка composer (копируем из официального образа)
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Чистим файлы
 RUN docker-php-source delete
